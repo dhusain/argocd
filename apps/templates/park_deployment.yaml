@@ -1,0 +1,43 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  annotations:
+  name: parksmap
+  namespace: parks
+  labels:
+    app: parks
+    app.kubernetes.io/part-of: parksmap
+    app.kubernetes.io/instance: parksmap
+    app.kubernetes.io/component: parksmap
+    app.openshift.io/runtime: java
+    role: frontend
+    app.kubernetes.io/name: java
+    component: parksmap
+    app.openshift.io/runtime-version: openjdk-11-el7
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: parksmap
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: parksmap
+        component: parksmap
+        deploymentconfig: parksmap
+        role: frontend
+    spec:
+      containers:
+        - name: parksmap
+          image: quay.io/openshiftroadshow/parksmap:latest
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8443
+              protocol: TCP
+            - containerPort: 8778
+              protocol: TCP
+ 
+
+
